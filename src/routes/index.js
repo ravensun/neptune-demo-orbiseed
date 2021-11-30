@@ -53,9 +53,9 @@ router.post("/createBrands", (req, res) => {
   console.log("graph reader", graphReader);
   const gR = graphReader.traversal().withRemote(dcReader);
   console.log("traversal reader", gR);
-  const { brands, name } = req.body;
+  const { label, name } = req.body;
   const id = uuid.v4();
-  gR.addV({ label: brands, id, name })
+  gR.addV({ label, id, name })
     .then((data) => {
       console.log(data);
       dcReader.close();

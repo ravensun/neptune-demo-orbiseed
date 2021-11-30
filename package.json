@@ -1,0 +1,51 @@
+{
+  "name": "nodejs-template",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "npm run prod",
+    "prod": "NODE_ENV=production npm-run-all clean build server:prod",
+    "clean": "rimraf .dist",
+    "build": "babel ./src --out-dir .dist",
+    "server:prod": "pm2-runtime -i 0 .dist/index.js",
+    "dev": "NODE_ENV=development npm-run-all server",
+    "watch": "nodemon",
+    "server": "babel-node ./src/index.js"
+  },
+  "author": "Sherlock Chen",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "7.8.4",
+    "aws-sdk": "2.896.0",
+    "cookie-parser": "1.4.4",
+    "cors": "2.8.5",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "gremlin": "3.5.1",
+    "jsonwebtoken": "8.5.1",
+    "jwk-to-pem": "2.0.5",
+    "lodash": "4.17.21",
+    "moment": "2.29.1",
+    "multer": "1.4.2",
+    "multer-s3": "2.9.0",
+    "npm-run-all": "4.1.5",
+    "path": "0.12.7",
+    "pino": "5.16.0",
+    "pino-pretty": "3.5.0",
+    "pm2": "4.4.0",
+    "request": "2.88.2",
+    "request-promise": "4.2.6",
+    "rimraf": "3.0.2",
+    "uuid": "8.3.2",
+    "validator": "13.6.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-eslint": "^8.2.6",
+    "nodemon": "^1.19.1"
+  }
+}

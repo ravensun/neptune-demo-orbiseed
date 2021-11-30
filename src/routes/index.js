@@ -4,7 +4,7 @@ import express from "express";
 import makeResponse from "../utilities/response";
 import logger from "../utilities/logger";
 import gremlin from "gremlin";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router();
 
@@ -55,8 +55,9 @@ router.post("/createBrands", (req, res) => {
   // console.log("traversal reader", gR);
   const { label, name } = req.body;
   const id = uuidv4();
-  console.log(label, id, name)
-  gR.addVertex({ label, id, name })
+  console.log(label, id, name);
+  gR.addV("Brands")
+    .property(id, "1")
     .then((data) => {
       console.log(data);
       dcReader.close();

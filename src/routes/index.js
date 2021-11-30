@@ -4,7 +4,7 @@ import express from "express";
 import makeResponse from "../utilities/response";
 import logger from "../utilities/logger";
 import gremlin from "gremlin";
-import uuid from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
 const router = express.Router();
 
@@ -54,7 +54,7 @@ router.post("/createBrands", (req, res) => {
   const gR = graphReader.traversal().withRemote(dcReader);
   console.log("traversal reader", gR);
   const { label, name } = req.body;
-  const id = uuid.v4();
+  const id = uuidv4();
   gR.addV({ label, id, name })
     .then((data) => {
       console.log(data);

@@ -4,6 +4,7 @@ import express from "express";
 import makeResponse from "../utilities/response";
 import logger from "../utilities/logger";
 import gremlin from "gremlin";
+import uuid from "uuid";
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get("/health", (_, res) => {
   return makeResponse(res, 200, "Healthy");
 });
 
-router.get("/query", (_, res) => {
+router.get("/queryAll", (_, res) => {
   const DriverRemoteConnection = gremlin.driver.DriverRemoteConnection;
   const Graph = gremlin.structure.Graph;
 
@@ -40,7 +41,7 @@ router.get("/query", (_, res) => {
     });
 });
 
-router.post("/query", (req, res) => {
+router.post("/createBrands", (req, res) => {
   const DriverRemoteConnection = gremlin.driver.DriverRemoteConnection;
   const Graph = gremlin.structure.Graph;
 
@@ -52,7 +53,9 @@ router.post("/query", (req, res) => {
   console.log("graph reader", graphReader);
   const gR = graphReader.traversal().withRemote(dcReader);
   console.log("traversal reader", gR);
-  gR.addV({ label: "Brands", id: "4ce6b26c-8057-4b08-a92f-aff30dde2ae3", name: "Zurn" })
+  const { brands, name } = req.body;
+  const id = uuid.v4();
+  gR.addV({ label: brands, id, name })
     .then((data) => {
       console.log(data);
       dcReader.close();

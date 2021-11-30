@@ -55,7 +55,7 @@ router.post("/createBrands", (req, res) => {
   console.log("traversal reader", gR);
   const { label, name } = req.body;
   const id = uuidv4();
-  gR.addV({ label, id, name })
+  gR.addVertex({ label, id, name })
     .then((data) => {
       console.log(data);
       dcReader.close();

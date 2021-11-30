@@ -23,8 +23,7 @@ resources:
             - "NeptuneServiceSecurityGroup"
             - "GroupId"
         Port: 8182
-        IamAuthEnabled: false # make this true if using this for anything real, 
-                              # you will then need to sign requests
+        IamAuthEnabled: false 
       DependsOn:
         - NeptuneDBSubnetGroup
 

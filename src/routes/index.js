@@ -20,11 +20,11 @@ router.get("/queryAll", (_, res) => {
   const clusterEndpoint = process.env.CLUSTER_ENDPOINT;
 
   const dcReader = new DriverRemoteConnection("wss://" + clusterEndpoint + ":8182/gremlin", {});
-  console.log("driver remote connection reader", dcReader);
+  // console.log("driver remote connection reader", dcReader);
   const graphReader = new Graph();
-  console.log("graph reader", graphReader);
+  // console.log("graph reader", graphReader);
   const gR = graphReader.traversal().withRemote(dcReader);
-  console.log("traversal reader", gR);
+  // console.log("traversal reader", gR);
   gR.V()
     .limit(200)
     .count()
@@ -48,13 +48,14 @@ router.post("/createBrands", (req, res) => {
   const clusterEndpoint = process.env.CLUSTER_ENDPOINT;
 
   const dcReader = new DriverRemoteConnection("wss://" + clusterEndpoint + ":8182/gremlin", {});
-  console.log("driver remote connection reader", dcReader);
+  // console.log("driver remote connection reader", dcReader);
   const graphReader = new Graph();
-  console.log("graph reader", graphReader);
+  // console.log("graph reader", graphReader);
   const gR = graphReader.traversal().withRemote(dcReader);
-  console.log("traversal reader", gR);
+  // console.log("traversal reader", gR);
   const { label, name } = req.body;
   const id = uuidv4();
+  console.log(label, id, name)
   gR.addVertex({ label, id, name })
     .then((data) => {
       console.log(data);
